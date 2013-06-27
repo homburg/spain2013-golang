@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- syntaxHighlighter -->
+		<script type="text/javascript" src="js/shCore.js"></script>
+		<script type="text/javascript" src="js/shBrushGo.js"></script>
+		<script type="text/javascript" src="js/shBrushPython.js"></script>
+		<link rel="stylesheet" href="css/syntaxHighlighter/shCore.css">
+		<link rel="stylesheet" href="css/syntaxHighlighter/shThemeRDark.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<section>
+						<h1>Golang 2013</h1>
+						<br />
+						<p>#golang</p>
+						<br />
+						<p>Go v1.1.1</p>
+					</section>
+					<section>
+						<pre class="brush: go">
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	hw := "Hello Go!"
+	fmt.Println(hw)
+}
+						</pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Forhistorie</h1>
+						<ul>
+							<li>2009 - Rob Pike, Ken Thompson; Bell labs
+								<ul>
+									<li>System-language</li>
+									<li>Server-language</li>
+									<li>Alternativ til C++ med GC</li>
+								</ul>
+							</li>
+							<li>2013 - Go v1.1.1
+								<ul>
+								<li>Google</li>
+								<li>Heroku</li>
+								<li>Mozilla</li>
+								<li>...</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Platforme og arkitekturer</h2>
+						<ul>
+							<li>amd64, 386, arm</li>
+							<li>OS X 10.6+</li>
+							<li>Linux 2.6.23+</li>
+							<li>Windows 2000+</li>
+							<li>BSD, etc.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Compiler(e)</h2>
+						<ul>
+							<li>go build
+								<ul>
+									<li>Statisk linked executable (portable)</li>
+								</ul>
+							</li>
+							<li>gccgo
+								<ul>
+									<li>Dynamisk linked til C-kode</li>
+									<li>Brug pointers vha <em>unsafe</em> package</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+					<h1>Inspirationer</h1>
+					<ul>
+						<li>C-familien {...}</li>
+						<li>Imperativt</li>
+						<li>Ikke rigtig OOP
+						<pre class="brush: go">
+type Bil struct {
+	Color string
+	Wheels int
+}</pre>
+					</section>
+					<section>
+							<h2>PHP</h2>
+							<p>Ligner lidt</p>
+							<pre class="brush: go">
+// php: function
+func doSomething() {
+	// ...
+}</pre>
+							<h2>JavaScript</h2>
+							<p>Funktionel programmering (altså ikke rigtigt)</p>
+							<p>First class functions</p>
+							<p>Ingen semikolon</p>
+							<pre class="brush: go">
+x := 42
+
+f := (func (arghh) {
+	return func() {
+		fmt.Println("Value!" + string(arghh))
+	}
+}(x))</pre>
+						</ul>
+					</ul>
+					</section>
+
+					<section>
+						<h2>Python</h2>
+						<pre class="brush: go">
+package main
+// python: module
+
+is := []int{1, 22, 74, 23, 34}
+
+// python: for x in range(1, 10)
+for i := range is {
+	fmt.Println(i)
+}
+
+path.Join("home", "thomas", "code", "go")
+// => /home/thomas/code/go
+						</pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Standard library</h1>
+						<p><a href="http://golang.org/pkg/">golang.org/pkg/</a></p>
+
+						<p>
+							Implementeret i Go og fuld af kodeeksempler.<br />
+							bl.a. printf
+						</p>
+						<ul>
+							<li>http-server</li>
+							<li>fcgi-server (php-fpm)</li>
+							<li>jsonrpc</li>
+							<ul>codecs
+								<li>json</li>
+								<li>xml</li>
+								<li>gob (binary)</li>
+							</ul>
+							<li>unicode</li>
+							<li>bytes/bufio</li>
+							<li>reflection</li>
+							<li><em>go</em> ast, scanner, parser. Statisk analyse.</li>
+							<li>os - Cross platform fs access</li>
+							<li>testing - http, etc.</li>
+						</ul>
+
+					</section>
+					<section>
+						<h2>Reflection / statisk analyse</h2>
+						<p>gocode giver høj VIM-faktor</p>
+						<p>autocompletion på variabel-niveau</p>
+					</section>
+					<section>
+						<h2>net/http</h2>
+						<p>Abstraheret request/response</p>
+						<p>Handlers from type (objekt) eller function</p>
+					</section>
+
+				</section>
+
+				<section>
+					<h1>Tools</h1>
+						<p><em>Batteries included...</em></p>
+						<code>$ go ...</code>
+						<ul>
+							<li>go fmt - Håndhæver den korrekte formattering</li>
+							<li>go get - Download and install packages from github, google code, etc.</li>
+							<li>go test - Run package tests</li>
+							<li>go list - List installed packages</li>
+							<li>go run - Run go file (#!/usr/bin/gorun)</li>
+							<li>go build - Build go executable</li>
+							<li>go install - Install go package</li>
+							<li>go doc - Produce documentation</li>
+						</ul>
+				</section>
+
+				<section>
+				<section>
+					<h1>Python</h1>
+					<p>Alt er dynamisk: metoder, etc.</p>
+					<p>Masser af magi: __repr__, __del__, __getitem__, __init__, __le__, etc.</p>
+					<pre class="brush: python">
+class Fisk(object):
+	def __le__(self, other):
+		pass
+
+f1 = Fisk()
+f2 = Fisk()
+print f2 &lt; f1
+					</pre>
+
+				</section>
+				</section>
+
+				<section>
+					<h1>Goroutines</h1>
+					<pre class="brush: go">
+go func () {...}()
+
+select {
+	case &lt;-myChannel:
+	return;
+}
+					</pre>
+				</section>
+
+				<section>
+					<h1>Issues</h1>
+						<ul>
+							<li>Pakke-navne efter VCS-addresse</li>
+							<li>Ingen templating/generics</li>
+						</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			SyntaxHighlighter.all();
+
+		</script>
+
+	</body>
+</html>
